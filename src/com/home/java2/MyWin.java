@@ -51,6 +51,7 @@ public class MyWin extends JFrame {
     private void messageSend() {
         chatTextArea.append(chatTextField.getText() + "\n");
         chatTextArea.setCaretPosition(chatTextArea.getDocument().getLength());
+        chatTextField.requestFocus();
         chatTextField.setText("");
     }
 }
