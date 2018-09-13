@@ -1,4 +1,4 @@
-package com.home.java2;
+package com.home.java2.client;
 
 public interface ClientUI {
     void showUI();

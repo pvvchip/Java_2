@@ -1,4 +1,4 @@
-package com.home.java2;
+package com.home.java2.server;
 
 import java.util.ArrayList;
 import java.util.List;

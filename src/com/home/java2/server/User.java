@@ -1,4 +1,4 @@
-package com.home.java2;
+package com.home.java2.server;
 
 public class User {
     private final String login;
