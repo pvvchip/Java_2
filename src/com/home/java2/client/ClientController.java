@@ -40,7 +40,11 @@ public class ClientController implements Controller {
                 while (true) {
                     if (in.hasNext()) {
                         String w = in.nextLine();
-                        if (w.startsWith("end session")) break;
+                        if (w.startsWith("end session")) {
+                            ui.addMessage("Ошибка авторизации.");
+                            Thread.sleep(5000);
+                            System.exit(0);
+                        }
                         ui.addMessage(w);
                     }
                 }

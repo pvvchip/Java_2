@@ -68,10 +68,12 @@ public class ClientHandler {
                         String msg = "Invalid login or password";
                         System.out.println(msg);
                         pw.println(msg);
+                        pw.println("end session");
                     } else if (server.isNickTaken(nick)) {
                         String msg = "Nick " + nick + " already taken!";
                         System.out.println(msg);
                         pw.println(msg);
+                        pw.println("end session");
                     } else {
                         this.nick = nick;
                         String msg = "Auth ok!";
