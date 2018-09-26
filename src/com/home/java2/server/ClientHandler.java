@@ -3,6 +3,7 @@ package com.home.java2.server;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class ClientHandler {
@@ -21,7 +22,13 @@ public class ClientHandler {
             sc = new Scanner(socket.getInputStream());
             pw = new PrintWriter(socket.getOutputStream(), true);
             new Thread(() -> {
-                auth();
+                try {
+                    auth();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 System.out.println(nick + " handler waiting for new massages");
                 while (socket.isConnected()) {
                     String s = sc.nextLine();
@@ -52,7 +59,7 @@ public class ClientHandler {
     /**
      * Wait for command: "/auth login1 pass1"
      */
-    private void auth() {
+    private void auth() throws SQLException, ClassNotFoundException {
         while (true) {
             if (!sc.hasNextLine()) continue;
             String s = sc.nextLine();

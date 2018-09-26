@@ -3,6 +3,7 @@ package com.home.java2.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,22 +11,31 @@ public class Server {
     private ServerSocket serverSocket;
     private AuthService authService;
     private List<ClientHandler> clients = new ArrayList<>();
+    private myBase base;
 
     public Server(AuthService authService) {
         this.authService = authService;
         try {
             serverSocket = new ServerSocket(8189);
+            base = new myBase();
             System.out.println("Сервер запущен, ожидаем подключения...");
         } catch (IOException e) {
             System.out.println("Ошибка инициализации сервера");
             close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
     public void close() {
         try {
             serverSocket.close();
+            base.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         System.exit(0);
@@ -88,5 +98,9 @@ public class Server {
         sendBroadcastMessage(msg);
         System.out.println(msg);
         clients.remove(clientHandler);
+    }
+
+    public myBase getBase() {
+        return base;
     }
 }

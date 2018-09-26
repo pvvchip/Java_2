@@ -10,6 +10,7 @@ class User {
         this.login = login;
         this.password = password;
         this.nickname = nickname;
+
     }
 
     public String getLogin() {

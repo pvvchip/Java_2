@@ -1,7 +1,9 @@
 package com.home.java2.server;
 
+import java.sql.SQLException;
+
 public interface AuthService {
-    String authByLoginAndPassword(String login, String password);
+    String authByLoginAndPassword(String login, String password) throws SQLException, ClassNotFoundException;
 
     User createOrActivateUser(String login, String password, String nick);
 
