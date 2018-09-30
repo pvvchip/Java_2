@@ -1,18 +1,22 @@
 package com.home.java2.client;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class Client extends JFrame implements ClientUI {
     private JTextField jtf;
     private JTextArea jta;
     private Controller controller;
+    private int index;
 
-    public Client(Controller controller) {
+    public Client(Controller controller, int index) {
 
         this.controller = controller;
+        this.index = index;
 
         setBounds(600, 300, 500, 500);
         setTitle("Client");
@@ -36,6 +40,13 @@ public class Client extends JFrame implements ClientUI {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                try {
+                    new HistoryMsg().saveMsg(index, jta);
+                } catch (BadLocationException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 super.windowClosing(e);
                 controller.closeConnection();
             }
@@ -59,5 +70,6 @@ public class Client extends JFrame implements ClientUI {
     @Override
     public void showUI() {
         setVisible(true);
+        new HistoryMsg().openMsg(index, jta);
     }
 }

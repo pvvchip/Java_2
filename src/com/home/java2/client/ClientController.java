@@ -20,10 +20,10 @@ public class ClientController implements Controller {
         initConnection();
     }
 
-    public void showUI(ClientUI ui) {
+    public void showUI(ClientUI ui, int index) {
         this.ui = ui;
         ui.showUI();
-        sendMessage("/auth login" + index + " pass" + index);
+        sendMessage("/auth login" + this.index + " pass" + this.index);
     }
 
     private void initConnection() {
@@ -68,5 +68,9 @@ public class ClientController implements Controller {
             in.close();
         } catch (IOException exc) {
         }
+    }
+
+    public int getIndex() {
+        return index;
     }
 }

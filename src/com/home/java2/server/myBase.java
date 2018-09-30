@@ -14,7 +14,7 @@ public class myBase {
         con = DriverManager.getConnection("jdbc:sqlite:baseFile.db");
         stat = con.createStatement();
         try {
-            rs = stat.executeQuery("SELECT * FROM Users;");
+            rs = stat.executeQuery("SELECT * FROM Users LIMIT 1;");
 //            System.out.println(rs);
         } catch (SQLiteException e) {
             stat.executeUpdate("CREATE TABLE IF NOT EXISTS Users(" +
